@@ -4,6 +4,7 @@ export interface User {
   email: string;
   password: string;
   telegramToken: string;
+  telegramChatId: number;
   verified: boolean;
   verifyCode: string;
 }

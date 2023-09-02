@@ -22,4 +22,15 @@ export class UserRepository implements IUserRepository {
   async findByEmail(email: string): Promise<User | null> {
     return await UserModel.findOne({ email });
   }
+
+  async findByTelegramToken(telegramToken: string): Promise<User | null> {
+    return await UserModel.findOne({ telegramToken });
+  }
+
+  async saveChatId(id: string, chatId: number): Promise<User | null> {
+    return await UserModel.findOneAndUpdate(
+      { _id: id },
+      { telegramChatId: chatId }
+    );
+  }
 }

@@ -1,9 +1,11 @@
 import express, { json } from "express";
 import cors from "cors";
 import notificationRoutes from "../infra/http/notification-routes-express";
-import ConnectDatabase from "./config/connectDatabase";
+import ConnectDatabase from "../infra/database/mongodb/connectDatabase";
 import config from "config";
 import userRoutes from "../infra/http/user-routes-express";
+import bot, { initializeBot } from "../infra/messageria/telegram/telegram";
+import Logger from "../utils/logger";
 
 const app = express();
 
@@ -24,5 +26,6 @@ const port = config.get("port");
 
 app.listen(port, async () => {
   await ConnectDatabase(config.get("dbUrl"));
-  console.log(`App is running on port ${port}`);
+  initializeBot();
+  Logger.info(`App is running on port ${port}`);
 });

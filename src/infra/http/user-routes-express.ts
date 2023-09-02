@@ -14,5 +14,6 @@ userRoutes.post(
 );
 userRoutes.get("/:verifyCode", userController.confirmAccount);
 userRoutes.post("/login", userController.login);
+userRoutes.post("/telegram", userController.generateTelegramUrl);
 
 export default userRoutes;
