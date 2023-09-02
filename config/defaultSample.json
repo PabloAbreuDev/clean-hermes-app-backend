@@ -1,0 +1,19 @@
+{
+  "dbUrl": "",
+  "baseurl": "",
+  "port": 3000,
+  "telegram": {
+    "botToken": ""
+  },
+  "smtp": {
+    "host": "",
+    "port": "",
+    "user": "",
+    "pass": ""
+  },
+  "jwt": {
+    "secret": "",
+    "tokenExpiresIn": "",
+    "refreshTokenExpiresIn": ""
+  }
+}
