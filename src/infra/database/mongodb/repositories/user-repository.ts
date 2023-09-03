@@ -1,5 +1,5 @@
 import { User } from "../../../../entities/user";
-import { IUserRepository } from "../../../../interfaces/repositories/user-repository";
+import { IUserRepository } from "../../../../usecases/ports/repositories/user-repository";
 import UserModel from "../models/user";
 
 export class UserRepository implements IUserRepository {

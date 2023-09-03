@@ -2,7 +2,7 @@ import config from "config";
 import {
   EmailOptions,
   IEmailService,
-} from "../../../interfaces/adapters/email-service";
+} from "../../../usecases/ports/adapters/email-service";
 import nodemailer from "nodemailer";
 
 export class NodeMailerMailService implements IEmailService {

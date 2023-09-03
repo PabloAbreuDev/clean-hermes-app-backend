@@ -1,6 +1,6 @@
 import config from "config";
-import { IUserRepository } from "../interfaces/repositories/user-repository";
 import { UserNotFoundError } from "./errors/user-not-found";
+import { IUserRepository } from "./ports/repositories/user-repository";
 
 export interface GenerateTelegramUrlDto {
   id: string;

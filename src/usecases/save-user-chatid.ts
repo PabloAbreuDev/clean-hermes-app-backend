@@ -1,6 +1,6 @@
-import { IUserRepository } from "../interfaces/repositories/user-repository";
 import Logger from "../utils/logger";
 import { UserNotFoundError } from "./errors/user-not-found";
+import { IUserRepository } from "./ports/repositories/user-repository";
 
 export interface SaveUserChatIdDto {
   telegramToken: string;

@@ -1,7 +1,7 @@
 import { User } from "../entities/user";
-import { IUserRepository } from "../interfaces/repositories/user-repository";
 import { ConfirmUserError } from "./errors/confirm-user-error";
 import { UserNotFoundError } from "./errors/user-not-found";
+import { IUserRepository } from "./ports/repositories/user-repository";
 
 export interface ConfirmAccountDto {
   verifyCode: string;

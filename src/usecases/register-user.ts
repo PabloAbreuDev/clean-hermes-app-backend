@@ -1,11 +1,11 @@
 import { randomUUID } from "crypto";
 import { User } from "../entities/user";
-import { IUserRepository } from "../interfaces/repositories/user-repository";
 import { RegisterUserError } from "./errors/register-user-error";
 import { UserAlreadyExistsError } from "./errors/user-already-exists";
-import { IEmailService } from "../interfaces/adapters/email-service";
+import { IEmailService } from "./ports/adapters/email-service";
 import { confirmAccountTemplate } from "../utils/templates/email/confirm-account";
 import { hashPassword } from "../utils/bcrypt";
+import { IUserRepository } from "./ports/repositories/user-repository";
 
 export interface RegisterUserDto {
   name: string;

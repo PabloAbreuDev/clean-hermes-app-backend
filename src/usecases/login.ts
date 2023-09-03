@@ -1,9 +1,9 @@
 import config from "config";
-import { IUserRepository } from "../interfaces/repositories/user-repository";
 import { comparePasswords } from "../utils/bcrypt";
 import { generateTokens } from "../utils/jwt";
 import { EmailOrPasswordInvalidError } from "./errors/email-or-pass-invalid";
 import { UserNotFoundError } from "./errors/user-not-found";
+import { IUserRepository } from "./ports/repositories/user-repository";
 
 export interface LoginDto {
   email: string;
