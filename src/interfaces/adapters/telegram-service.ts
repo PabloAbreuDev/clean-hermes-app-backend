@@ -1,5 +1,5 @@
 export interface TelegramOptions {
-	to: string,
+	to: number,
 	text: string
 }
 export interface ITelegramService {
