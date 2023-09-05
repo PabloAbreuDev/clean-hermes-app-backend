@@ -38,3 +38,5 @@ yarn.lock
 TODO.md
 
 config/default.json
+
+coverage
