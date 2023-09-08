@@ -20,7 +20,7 @@ export class ConfirmAccount implements IConfirmAccount {
     }
 
     try {
-      const verifiedUser = await this.userRepository.confirmAccount(user._id);
+      const verifiedUser = await this.userRepository.confirmAccount(user.id);
       return verifiedUser;
     } catch (err) {
       throw new ConfirmUserError();

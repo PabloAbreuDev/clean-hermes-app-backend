@@ -9,7 +9,7 @@ describe("Register user", () => {
 		jest.spyOn(mockUserRepository, "findByEmail").mockResolvedValue(null);
 		jest.spyOn(mockEmailService, "send").mockResolvedValue();
 		jest.spyOn(mockUserRepository, "create").mockResolvedValue({
-			_id: "1",
+			id: "1",
 			verifyCode: "abc",
 			verified: false,
 			name: "",
@@ -30,7 +30,7 @@ describe("Register user", () => {
 		const sut = await registerUser.execute(registerUserParams);
 		expect(sut).toBeTruthy();
 		expect(sut).toMatchObject({
-			_id: "1",
+			id: "1",
 			verifyCode: "abc",
 			verified: false,
 			name: "",
@@ -48,7 +48,7 @@ describe("Register user", () => {
 
 	it("Should return an error if user already exists", async () => {
 		jest.spyOn(mockUserRepository, "findByEmail").mockResolvedValue({
-			_id: "1",
+			id: "1",
 			verifyCode: "abc",
 			verified: false,
 			name: "",

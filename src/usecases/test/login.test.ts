@@ -6,7 +6,7 @@ import { mockUserRepository } from "./mocks/user-repository.mock";
 describe("Login", () => {
 	it("Should login correctly", async () => {
 		jest.spyOn(mockUserRepository, "findByEmail").mockResolvedValue({
-			_id: "1",
+			id: "1",
 			verifyCode: "abc",
 			verified: false,
 			name: "",
@@ -38,7 +38,7 @@ describe("Login", () => {
 	});
 	it("Should throw an error if password is invalid", async () => {
 		jest.spyOn(mockUserRepository, "findByEmail").mockResolvedValue({
-			_id: "1",
+			id: "1",
 			verifyCode: "abc",
 			verified: false,
 			name: "",

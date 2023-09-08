@@ -5,7 +5,7 @@ import { mockUserRepository } from "./mocks/user-repository.mock";
 describe("Save user chat id", () => {
 	it("Should save a chat id succefully", async () => {
 		jest.spyOn(mockUserRepository, "findByTelegramToken").mockResolvedValue({
-			_id: "1",
+			id: "1",
 			verifyCode: "abc",
 			verified: false,
 			name: "",
@@ -15,7 +15,7 @@ describe("Save user chat id", () => {
 			password: "$2a$12$qAAfJgFofzsUs2oz0d1Od.qDcOxCsPT2S0aG3AyxZjJeOvHcpPPIm", // pass123 encryptado
 		});
 		jest.spyOn(mockUserRepository, "saveChatId").mockResolvedValue({
-			_id: "1",
+			id: "1",
 			verifyCode: "abc",
 			verified: false,
 			name: "",
@@ -31,7 +31,7 @@ describe("Save user chat id", () => {
 		const saveUserChatId = new SaveUserChatId(mockUserRepository);
 		const sut = await saveUserChatId.execute(saveUserChatIdParams);
 		expect(sut).toMatchObject({
-			_id: "1",
+			id: "1",
 			verifyCode: "abc",
 			verified: false,
 			name: "",
@@ -57,7 +57,7 @@ describe("Save user chat id", () => {
 
 	it("Should throw an error if chat id it not saved correctly", async () => {
 		jest.spyOn(mockUserRepository, "findByTelegramToken").mockResolvedValue({
-			_id: "1",
+			id: "1",
 			verifyCode: "abc",
 			verified: false,
 			name: "",

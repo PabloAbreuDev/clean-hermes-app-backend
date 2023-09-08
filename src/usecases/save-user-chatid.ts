@@ -24,7 +24,7 @@ export class SaveUserChatId implements ISaveUserChatId {
     }
 
     try {
-      return await this.userRepository.saveChatId(user._id, data.chatId);
+      return await this.userRepository.saveChatId(user.id, data.chatId);
     } catch (err) {
       Logger.error("Error on save chat id");
       return;

@@ -6,7 +6,7 @@ import { mockUserRepository } from "./mocks/user-repository.mock";
 describe("Confirm account", () => {
 	it("Should confirm account correctly", async () => {
 		jest.spyOn(mockUserRepository, "findByVerifyCode").mockResolvedValue({
-			_id: "1",
+			id: "1",
 			verifyCode: "abc",
 			verified: false,
 			name: "",
@@ -17,7 +17,7 @@ describe("Confirm account", () => {
 		});
 
 		jest.spyOn(mockUserRepository, "confirmAccount").mockResolvedValue({
-			_id: "1",
+			id: "1",
 			verifyCode: "abc",
 			verified: true,
 			name: "",
@@ -34,7 +34,7 @@ describe("Confirm account", () => {
 		const confirmAccount = new ConfirmAccount(mockUserRepository);
 		const sut = await confirmAccount.execute(confirmAccountParams);
 
-		expect(sut).toMatchObject({ _id: "1", verifyCode: "abc", verified: true });
+		expect(sut).toMatchObject({ id: "1", verifyCode: "abc", verified: true });
 		expect(mockUserRepository.findByVerifyCode).toHaveBeenCalledWith("abc");
 	});
 
@@ -49,7 +49,7 @@ describe("Confirm account", () => {
 
 	it("Should throw an error if user not confirmed succefuly", async () => {
 		jest.spyOn(mockUserRepository, "findByVerifyCode").mockResolvedValue({
-			_id: "1",
+			id: "1",
 			verifyCode: "abc",
 			verified: false,
 			name: "",

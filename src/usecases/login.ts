@@ -33,7 +33,7 @@ export class Login implements ILogin {
     }
 
     return generateTokens(
-      { _id: user._id, email: user.email },
+      { _id: user.id, email: user.email },
       config.get("jwt.secret"),
       config.get("jwt.tokenExpiresIn"),
       config.get("jwt.refreshTokenExpiresIn")

@@ -1,6 +1,7 @@
 export interface TelegramOptions {
-	text: string;
+  to: number;
+  text: string;
 }
 export interface ITelegramService {
-	send: (options: TelegramOptions) => Promise<TelegramOptions>;
+  send: (options: TelegramOptions) => Promise<TelegramOptions>;
 }

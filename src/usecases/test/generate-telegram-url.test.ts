@@ -9,7 +9,7 @@ import { UserNotFoundError } from "../errors/user-not-found";
 describe("Generate telegram url", () => {
 	it("Should return a telegram url correctly", async () => {
 		const mockedUser = {
-			_id: "1",
+			id: "1",
 			verifyCode: "abc",
 			verified: false,
 			name: "",
