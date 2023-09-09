@@ -1,8 +1,9 @@
+import { SendNotificationDto } from "../../domain/usecases/send-notification";
 import { InvalidChatIdError } from "../errors/invalid-chat-id";
 import { SendMailError } from "../errors/send-mail-error";
 import { SendTelegramError } from "../errors/send-telegram-error";
 import { UserNotFoundError } from "../errors/user-not-found";
-import { SendNotification, SendNotificationDto } from "../send-notification";
+import { SendNotification } from "../send-notification";
 import { mockEmailService } from "./mocks/email-service.mock";
 import { mockNotificationRepository } from "./mocks/notification-repository.mock";
 import { mockTelegramService } from "./mocks/telegram-service.mock";
