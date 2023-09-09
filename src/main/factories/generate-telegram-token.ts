@@ -1,6 +1,6 @@
-import { Controller } from "../../controllers/ports/http";
-import { GenerateTelegramURLController } from "../../controllers/user/generate-telegram-url.controller";
 import { UserRepository } from "../../infra/database/mongodb/repositories/user-repository";
+import { GenerateTelegramURLController } from "../../presentation/controllers/user/generate-telegram-url.controller";
+import { Controller } from "../../presentation/protocols/http";
 import { GenerateTelegramUrl } from "../../usecases/generate-telegram-url";
 
 export const makeGenerateTelegramUrl = (): Controller => {

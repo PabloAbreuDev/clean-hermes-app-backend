@@ -1,15 +1,11 @@
-import { User } from "../entities/user";
+import { User } from "../domain/entities/user";
+import {
+  IConfirmAccount,
+  ConfirmAccountDto,
+} from "../domain/usecases/confirm-account";
 import { ConfirmUserError } from "./errors/confirm-user-error";
 import { UserNotFoundError } from "./errors/user-not-found";
 import { IUserRepository } from "./ports/repositories/user-repository";
-
-export interface ConfirmAccountDto {
-  verifyCode: string;
-}
-
-export interface IConfirmAccount {
-  execute(data: ConfirmAccountDto): Promise<User | null | undefined>;
-}
 
 export class ConfirmAccount implements IConfirmAccount {
   constructor(private readonly userRepository: IUserRepository) {}

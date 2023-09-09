@@ -1,20 +1,10 @@
 import config from "config";
-import { comparePasswords } from "../utils/bcrypt";
-import { generateTokens } from "../utils/jwt";
 import { EmailOrPasswordInvalidError } from "./errors/email-or-pass-invalid";
 import { UserNotFoundError } from "./errors/user-not-found";
 import { IUserRepository } from "./ports/repositories/user-repository";
-
-export interface LoginDto {
-  email: string;
-  password: string;
-}
-
-export interface ILogin {
-  execute(
-    data: LoginDto
-  ): Promise<{ accessToken: string; refreshToken: string }>;
-}
+import { ILogin, LoginDto } from "../domain/usecases/login";
+import { comparePasswords } from "../utils/bcrypt";
+import { generateTokens } from "../utils/jwt";
 
 export class Login implements ILogin {
   constructor(private readonly userRepository: IUserRepository) {}

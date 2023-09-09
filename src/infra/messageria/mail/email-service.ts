@@ -1,9 +1,10 @@
 import config from "config";
-import {
-  EmailOptions,
-  IEmailService,
-} from "../../../usecases/ports/adapters/email-service";
+
 import nodemailer from "nodemailer";
+import {
+  IEmailService,
+  EmailOptions,
+} from "../../../usecases/ports/adapters/email-service";
 
 export class NodeMailerMailService implements IEmailService {
   async send(options: EmailOptions) {

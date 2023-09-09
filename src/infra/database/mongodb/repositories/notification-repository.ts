@@ -1,6 +1,7 @@
-import { Notification } from "../../../../entities/notification";
+import { Notification } from "../../../../domain/entities/notification";
 import { WithId } from "../../../../usecases/ports/repositories/index.ts";
 import { INotificationRepository } from "../../../../usecases/ports/repositories/notification-repository";
+
 import NotificationModel from "../models/notification";
 
 export class NotificationRepository implements INotificationRepository {
@@ -11,5 +12,15 @@ export class NotificationRepository implements INotificationRepository {
   }
   async findById(id: string): Promise<WithId<Notification> | null> {
     return await NotificationModel.findById(id);
+  }
+  async find(
+    data: Partial<Notification>
+  ): Promise<WithId<Notification>[] | null> {
+    return await NotificationModel.find(data);
+  }
+  async findOne(
+    data: Partial<Notification>
+  ): Promise<WithId<Notification> | null> {
+    return await NotificationModel.findOne(data);
   }
 }

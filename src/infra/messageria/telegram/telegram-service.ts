@@ -1,9 +1,9 @@
 import config from "config";
+import axios from "axios";
 import {
   ITelegramService,
   TelegramOptions,
 } from "../../../usecases/ports/adapters/telegram-service";
-import axios from "axios";
 
 export class TelegramService implements ITelegramService {
   async send(options: TelegramOptions) {

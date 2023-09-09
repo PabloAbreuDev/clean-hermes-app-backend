@@ -1,5 +1,5 @@
 import { Schema, model } from "mongoose";
-import { Notification } from "../../../../entities/notification";
+import { Notification } from "../../../../domain/entities/notification";
 
 const notificationSchema = new Schema<Notification>({
   name: { type: String, required: true },

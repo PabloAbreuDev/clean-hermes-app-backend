@@ -1,5 +1,5 @@
-import { IUser, User } from "../../../entities/user";
 import { IBaseRepository, WithId } from "./index.ts";
+import { User } from "../../../domain/entities/user";
 
 export interface IUserRepository extends IBaseRepository<User> {
   findByTelegramToken(telegramToken: string): Promise<WithId<User> | null>;

@@ -1,6 +1,6 @@
-import { Controller } from "../../controllers/ports/http";
-import { ConfirmAccountController } from "../../controllers/user/confirm-account.controller";
 import { UserRepository } from "../../infra/database/mongodb/repositories/user-repository";
+import { ConfirmAccountController } from "../../presentation/controllers/user/confirm-account.controller";
+import { Controller } from "../../presentation/protocols/http";
 import { ConfirmAccount } from "../../usecases/confirm-account";
 
 export const makeConfirmAccount = (): Controller => {

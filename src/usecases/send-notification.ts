@@ -1,36 +1,17 @@
-import { SendMailError } from "./errors/send-mail-error";
-import { SendTelegramError } from "./errors/send-telegram-error";
-import { IEmailService } from "./ports/adapters/email-service";
-import { ITelegramService } from "./ports/adapters/telegram-service";
-import { UserNotFoundError } from "./errors/user-not-found";
-import { INotificationRepository } from "./ports/repositories/notification-repository";
-import { IUserRepository } from "./ports/repositories/user-repository";
-import { Notification } from "../entities/notification";
+import { Notification } from "../domain/entities/notification";
+import {
+  ISendNotification,
+  SendNotificationDto,
+} from "../domain/usecases/send-notification";
 import Logger from "../utils/logger";
 import { InvalidChatIdError } from "./errors/invalid-chat-id";
-
-export interface SendNotificationDto {
-  notification: {
-    name: string;
-    description: string;
-    additionalInfo: any;
-  };
-  receiverType: "EMAIL" | "TELEGRAM";
-  userId: string;
-  receiverEmailOptions: {
-    address: string;
-    subject: string;
-    text: string;
-  };
-  receiverTelegramOptions: {
-    to: number;
-    text: string;
-  };
-}
-
-export interface ISendNotification {
-  execute(data: SendNotificationDto): Promise<Notification | null | undefined>;
-}
+import { SendMailError } from "./errors/send-mail-error";
+import { SendTelegramError } from "./errors/send-telegram-error";
+import { UserNotFoundError } from "./errors/user-not-found";
+import { IEmailService } from "./ports/adapters/email-service";
+import { ITelegramService } from "./ports/adapters/telegram-service";
+import { INotificationRepository } from "./ports/repositories/notification-repository";
+import { IUserRepository } from "./ports/repositories/user-repository";
 
 export class SendNotification implements ISendNotification {
   constructor(
@@ -39,7 +20,6 @@ export class SendNotification implements ISendNotification {
     private readonly notificationRepository: INotificationRepository,
     private readonly userRepository: IUserRepository
   ) {}
-
   async execute(
     data: SendNotificationDto
   ): Promise<Notification | null | undefined> {

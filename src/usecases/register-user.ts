@@ -1,20 +1,14 @@
-import { User } from "../entities/user";
+import { User } from "../domain/entities/user";
 import { RegisterUserError } from "./errors/register-user-error";
 import { UserAlreadyExistsError } from "./errors/user-already-exists";
 import { IEmailService } from "./ports/adapters/email-service";
 import { confirmAccountTemplate } from "../utils/templates/email/confirm-account";
 import { hashPassword } from "../utils/bcrypt";
 import { IUserRepository } from "./ports/repositories/user-repository";
-
-export interface RegisterUserDto {
-  name: string;
-  email: string;
-  password: string;
-}
-
-export interface IRegisterUser {
-  execute(data: RegisterUserDto): Promise<User | null>;
-}
+import {
+  IRegisterUser,
+  RegisterUserDto,
+} from "../domain/usecases/register-user";
 
 export class RegisterUser implements IRegisterUser {
   constructor(

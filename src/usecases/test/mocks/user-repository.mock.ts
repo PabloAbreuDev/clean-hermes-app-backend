@@ -8,4 +8,6 @@ export const mockUserRepository: jest.Mocked<UserRepository> = {
   findById: jest.fn(),
   findByTelegramToken: jest.fn(),
   saveChatId: jest.fn(),
+  find: jest.fn(),
+  findOne: jest.fn(),
 };

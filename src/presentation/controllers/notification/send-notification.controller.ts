@@ -1,9 +1,9 @@
 import {
   ISendNotification,
   SendNotificationDto,
-} from "../../usecases/send-notification";
-import { Controller, HttpRequest, HttpResponse } from "../ports/http";
-import { created, serverError } from "../ports/status";
+} from "../../../domain/usecases/send-notification";
+import { Controller, HttpRequest, HttpResponse } from "../../protocols/http";
+import { created, serverError } from "../../protocols/status";
 
 export class SendNotificationController implements Controller {
   constructor(private readonly sendNotification: ISendNotification) {}

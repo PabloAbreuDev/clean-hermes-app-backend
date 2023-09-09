@@ -1,6 +1,6 @@
-import { ok, serverError } from "../ports/status";
-import { ILogin, LoginDto } from "../../usecases/login";
-import { Controller, HttpRequest, HttpResponse } from "../ports/http";
+import { ok, serverError } from "../../protocols/status";
+import { Controller, HttpRequest, HttpResponse } from "../../protocols/http";
+import { ILogin, LoginDto } from "../../../domain/usecases/login";
 
 export class LoginController implements Controller {
   constructor(private readonly loginService: ILogin) {}

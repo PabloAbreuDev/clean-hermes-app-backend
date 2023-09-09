@@ -1,6 +1,9 @@
-import { IRegisterUser, RegisterUserDto } from "../../usecases/register-user";
-import { Controller, HttpRequest, HttpResponse } from "../ports/http";
-import { created, serverError } from "../ports/status";
+import {
+  IRegisterUser,
+  RegisterUserDto,
+} from "../../../domain/usecases/register-user";
+import { Controller, HttpRequest, HttpResponse } from "../../protocols/http";
+import { created, serverError } from "../../protocols/status";
 
 export class RegisterUserController implements Controller {
   constructor(private readonly registerUser: IRegisterUser) {}

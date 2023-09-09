@@ -1,9 +1,9 @@
 import {
-  GenerateTelegramUrlDto,
   IGenerateTelegramUrl,
-} from "../../usecases/generate-telegram-url";
-import { Controller, HttpRequest, HttpResponse } from "../ports/http";
-import { created, serverError } from "../ports/status";
+  GenerateTelegramUrlDto,
+} from "../../../domain/usecases/generate-telegram-url";
+import { Controller, HttpRequest, HttpResponse } from "../../protocols/http";
+import { created, serverError } from "../../protocols/status";
 
 export class GenerateTelegramURLController implements Controller {
   constructor(private readonly generateTelegramToken: IGenerateTelegramUrl) {}

@@ -1,9 +1,9 @@
 import {
-  ConfirmAccountDto,
   IConfirmAccount,
-} from "../../usecases/confirm-account";
-import { Controller, HttpRequest, HttpResponse } from "../ports/http";
-import { ok, serverError } from "../ports/status";
+  ConfirmAccountDto,
+} from "../../../domain/usecases/confirm-account";
+import { Controller, HttpRequest, HttpResponse } from "../../protocols/http";
+import { ok, serverError } from "../../protocols/status";
 
 export class ConfirmAccountController implements Controller {
   constructor(private readonly confirmAccount: IConfirmAccount) {}

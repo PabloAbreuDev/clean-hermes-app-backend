@@ -6,8 +6,6 @@ import { initializeBot } from "../infra/messageria/telegram/telegram";
 import Logger from "../utils/logger";
 import notificationRoutes from "./routes/notification-routes-express";
 import userRoutes from "./routes/user-routes-express";
-import { adaptRoute } from "./adapter/express/express-route-adapter";
-import { makeUserLoginController } from "./factories/login";
 
 // Basic configurations
 const app = express();
