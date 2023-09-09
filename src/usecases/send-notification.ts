@@ -28,7 +28,7 @@ export interface SendNotificationDto {
   };
 }
 
-interface ISendNotification {
+export interface ISendNotification {
   execute(data: SendNotificationDto): Promise<Notification | null | undefined>;
 }
 

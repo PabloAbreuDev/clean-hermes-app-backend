@@ -6,7 +6,7 @@ export interface GenerateTelegramUrlDto {
   id: string;
 }
 
-interface IGenerateTelegramUrl {
+export interface IGenerateTelegramUrl {
   execute(data: GenerateTelegramUrlDto): Promise<string>;
 }
 

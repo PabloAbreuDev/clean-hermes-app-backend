@@ -12,7 +12,7 @@ export interface RegisterUserDto {
   password: string;
 }
 
-interface IRegisterUser {
+export interface IRegisterUser {
   execute(data: RegisterUserDto): Promise<User | null>;
 }
 

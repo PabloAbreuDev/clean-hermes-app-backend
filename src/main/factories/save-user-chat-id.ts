@@ -3,6 +3,6 @@ import { SaveUserChatId } from "../../usecases/save-user-chatid";
 
 export const makeSaveUserChatId = () => {
   const userRepository = new UserRepository();
-  const useCase = new SaveUserChatId(userRepository);
-  return useCase;
+  const saveUserChatId = new SaveUserChatId(userRepository);
+  return saveUserChatId;
 };

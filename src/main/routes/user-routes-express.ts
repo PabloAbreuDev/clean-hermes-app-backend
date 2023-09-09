@@ -1,19 +1,21 @@
 import { Router } from "express";
-import { UserController } from "../../controllers/user-controller";
 import { checkRules } from "../../main/middlewares/validators/validator";
 import { registerUserValidation } from "../../main/middlewares/validators/user-validator";
-
-const userController = new UserController();
+import { adaptRoute } from "../adapter/express/express-route-adapter";
+import { makeRegisterUserController } from "../factories/register-user";
+import { makeConfirmAccount } from "../factories/confirm-account";
+import { makeUserLoginController } from "../factories/login";
+import { makeGenerateTelegramUrl } from "../factories/generate-telegram-token";
 
 const userRoutes = Router();
 userRoutes.post(
   "/",
   registerUserValidation,
   checkRules,
-  userController.registerUser
+  adaptRoute(makeRegisterUserController())
 );
-userRoutes.get("/:verifyCode", userController.confirmAccount);
-userRoutes.post("/login", userController.login);
-userRoutes.post("/telegram", userController.generateTelegramUrl);
+userRoutes.get("/:verifyCode", adaptRoute(makeConfirmAccount()));
+userRoutes.post("/login", adaptRoute(makeUserLoginController()));
+userRoutes.post("/telegram", adaptRoute(makeGenerateTelegramUrl()));
 
 export default userRoutes;

@@ -10,7 +10,7 @@ export interface LoginDto {
   password: string;
 }
 
-interface ILogin {
+export interface ILogin {
   execute(
     data: LoginDto
   ): Promise<{ accessToken: string; refreshToken: string }>;

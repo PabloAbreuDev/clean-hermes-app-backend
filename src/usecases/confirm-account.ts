@@ -7,7 +7,7 @@ export interface ConfirmAccountDto {
   verifyCode: string;
 }
 
-interface IConfirmAccount {
+export interface IConfirmAccount {
   execute(data: ConfirmAccountDto): Promise<User | null | undefined>;
 }
 

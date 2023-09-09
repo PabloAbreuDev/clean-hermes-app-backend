@@ -1,20 +1,25 @@
+import { SendNotificationController } from "../../controllers/notification/send-notification.controller";
+import { Controller } from "../../controllers/ports/http";
 import { NotificationRepository } from "../../infra/database/mongodb/repositories/notification-repository";
 import { UserRepository } from "../../infra/database/mongodb/repositories/user-repository";
 import { NodeMailerMailService } from "../../infra/messageria/mail/email-service";
 import { TelegramService } from "../../infra/messageria/telegram/telegram-service";
-
 import { SendNotification } from "../../usecases/send-notification";
 
-export const makeSendNotification = () => {
+export const makeSendNotification = (): Controller => {
   const mailService = new NodeMailerMailService();
   const telegramService = new TelegramService();
   const notificationRepository = new NotificationRepository();
   const userRepository = new UserRepository();
-  const useCase = new SendNotification(
+
+  const sendNotification = new SendNotification(
     mailService,
     telegramService,
     notificationRepository,
     userRepository
   );
-  return useCase;
+  const sendNotificationController = new SendNotificationController(
+    sendNotification
+  );
+  return sendNotificationController;
 };
