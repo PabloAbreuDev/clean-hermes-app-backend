@@ -1,9 +1,11 @@
-import { Schema, model } from "mongoose";
+import { Schema, Types, model } from "mongoose";
 import { Notification } from "../../../../domain/entities/notification";
 
 const notificationSchema = new Schema<Notification>({
   name: { type: String, required: true },
   description: { type: String, required: true },
+  userId: { type: String, required: true },
+  additionalInfo: { type: Schema.Types.Mixed },
 });
 
 const NotificationModel = model<Notification>(

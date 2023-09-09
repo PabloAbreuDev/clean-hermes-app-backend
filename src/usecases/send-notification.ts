@@ -60,7 +60,13 @@ export class SendNotification implements ISendNotification {
     }
 
     try {
-      return await this.notificationRepository.create(data.notification);
+      const notification = new Notification({
+        description: data.notification.description,
+        name: data.notification.name,
+        userId: data.userId,
+        additionalInfo: data.notification.additionalInfo,
+      });
+      return await this.notificationRepository.create(notification);
     } catch (err) {
       this.logger.error({ extraInfo: err });
       return;
