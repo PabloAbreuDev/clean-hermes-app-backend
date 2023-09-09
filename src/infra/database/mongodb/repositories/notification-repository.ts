@@ -1,6 +1,6 @@
 import { Notification } from "../../../../domain/entities/notification";
-import { WithId } from "../../../../usecases/ports/repositories/index.ts";
-import { INotificationRepository } from "../../../../usecases/ports/repositories/notification-repository";
+import { WithId } from "../../../../usecases/protocols/repositories/index.ts";
+import { INotificationRepository } from "../../../../usecases/protocols/repositories/notification-repository";
 
 import NotificationModel from "../models/notification";
 

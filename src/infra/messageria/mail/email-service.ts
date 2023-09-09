@@ -1,10 +1,9 @@
 import config from "config";
-
 import nodemailer from "nodemailer";
 import {
   IEmailService,
   EmailOptions,
-} from "../../../usecases/ports/adapters/email-service";
+} from "../../../usecases/protocols/messageria/email-service";
 
 export class NodeMailerMailService implements IEmailService {
   async send(options: EmailOptions) {

@@ -1,10 +1,10 @@
 import config from "config";
 import { UserNotFoundError } from "./errors/user-not-found";
-import { IUserRepository } from "./ports/repositories/user-repository";
 import {
   IGenerateTelegramUrl,
   GenerateTelegramUrlDto,
 } from "../domain/usecases/generate-telegram-url";
+import { IUserRepository } from "./protocols/repositories/user-repository";
 
 export class GenerateTelegramUrl implements IGenerateTelegramUrl {
   constructor(private readonly userRepository: IUserRepository) {}

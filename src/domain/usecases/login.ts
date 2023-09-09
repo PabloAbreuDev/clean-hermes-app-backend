@@ -4,7 +4,5 @@ export interface LoginDto {
 }
 
 export interface ILogin {
-  execute(
-    data: LoginDto
-  ): Promise<{ accessToken: string; refreshToken: string }>;
+  execute(data: LoginDto): Promise<string>;
 }

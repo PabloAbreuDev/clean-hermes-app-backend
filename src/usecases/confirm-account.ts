@@ -5,7 +5,7 @@ import {
 } from "../domain/usecases/confirm-account";
 import { ConfirmUserError } from "./errors/confirm-user-error";
 import { UserNotFoundError } from "./errors/user-not-found";
-import { IUserRepository } from "./ports/repositories/user-repository";
+import { IUserRepository } from "./protocols/repositories/user-repository";
 
 export class ConfirmAccount implements IConfirmAccount {
   constructor(private readonly userRepository: IUserRepository) {}

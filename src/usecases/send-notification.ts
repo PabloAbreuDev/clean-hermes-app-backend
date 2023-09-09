@@ -3,22 +3,23 @@ import {
   ISendNotification,
   SendNotificationDto,
 } from "../domain/usecases/send-notification";
-import Logger from "../utils/logger";
 import { InvalidChatIdError } from "./errors/invalid-chat-id";
 import { SendMailError } from "./errors/send-mail-error";
 import { SendTelegramError } from "./errors/send-telegram-error";
 import { UserNotFoundError } from "./errors/user-not-found";
-import { IEmailService } from "./ports/adapters/email-service";
-import { ITelegramService } from "./ports/adapters/telegram-service";
-import { INotificationRepository } from "./ports/repositories/notification-repository";
-import { IUserRepository } from "./ports/repositories/user-repository";
+import { ILogger } from "./protocols/logger/logger";
+import { IEmailService } from "./protocols/messageria/email-service";
+import { ITelegramService } from "./protocols/messageria/telegram-service";
+import { INotificationRepository } from "./protocols/repositories/notification-repository";
+import { IUserRepository } from "./protocols/repositories/user-repository";
 
 export class SendNotification implements ISendNotification {
   constructor(
     private readonly mailService: IEmailService,
     private readonly telegramService: ITelegramService,
     private readonly notificationRepository: INotificationRepository,
-    private readonly userRepository: IUserRepository
+    private readonly userRepository: IUserRepository,
+    private readonly logger: ILogger
   ) {}
   async execute(
     data: SendNotificationDto
@@ -37,7 +38,7 @@ export class SendNotification implements ISendNotification {
           text: data.receiverEmailOptions.text,
         });
       } catch (err) {
-        Logger.error(err);
+        this.logger.error({ extraInfo: err });
         throw new SendMailError();
       }
     }
@@ -53,7 +54,7 @@ export class SendNotification implements ISendNotification {
           text: data.receiverTelegramOptions.text,
         });
       } catch (err) {
-        Logger.error(err);
+        this.logger.error({ extraInfo: err });
         throw new SendTelegramError();
       }
     }
@@ -61,7 +62,7 @@ export class SendNotification implements ISendNotification {
     try {
       return await this.notificationRepository.create(data.notification);
     } catch (err) {
-      Logger.error(err);
+      this.logger.error({ extraInfo: err });
       return;
     }
   }

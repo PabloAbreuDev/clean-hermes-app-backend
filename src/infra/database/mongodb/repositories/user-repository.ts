@@ -1,6 +1,6 @@
 import { User } from "../../../../domain/entities/user";
-import { WithId } from "../../../../usecases/ports/repositories/index.ts";
-import { IUserRepository } from "../../../../usecases/ports/repositories/user-repository";
+import { WithId } from "../../../../usecases/protocols/repositories/index.ts";
+import { IUserRepository } from "../../../../usecases/protocols/repositories/user-repository";
 import UserModel from "../models/user";
 
 export class UserRepository implements IUserRepository {

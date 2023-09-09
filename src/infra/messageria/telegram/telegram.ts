@@ -1,7 +1,7 @@
 import config from "config";
-import Logger from "../../../utils/logger";
 import telebot from "telebot";
 import { makeSaveUserChatId } from "../../../main/factories/save-user-chat-id";
+import { LoggerWithPino } from "../../logger/logger-adapter";
 
 export const initializeBot = () => {
   const token = config.get("telegram.botToken") as string;
@@ -31,7 +31,9 @@ export const initializeBot = () => {
 
   bot.start();
 
-  Logger.info("Telegram bot is running");
+  const Logger = new LoggerWithPino();
+
+  Logger.info({ description: "Telegram bot is running" });
 };
 
 export default initializeBot;

@@ -1,5 +1,6 @@
 import { NotificationRepository } from "../../infra/database/mongodb/repositories/notification-repository";
 import { UserRepository } from "../../infra/database/mongodb/repositories/user-repository";
+import { LoggerWithPino } from "../../infra/logger/logger-adapter";
 import { NodeMailerMailService } from "../../infra/messageria/mail/email-service";
 import { TelegramService } from "../../infra/messageria/telegram/telegram-service";
 import { SendNotificationController } from "../../presentation/controllers/notification/send-notification.controller";
@@ -11,12 +12,14 @@ export const makeSendNotification = (): Controller => {
   const telegramService = new TelegramService();
   const notificationRepository = new NotificationRepository();
   const userRepository = new UserRepository();
+  const logger = new LoggerWithPino();
 
   const sendNotification = new SendNotification(
     mailService,
     telegramService,
     notificationRepository,
-    userRepository
+    userRepository,
+    logger
   );
   const sendNotificationController = new SendNotificationController(
     sendNotification

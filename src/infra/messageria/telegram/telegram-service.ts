@@ -3,7 +3,7 @@ import axios from "axios";
 import {
   ITelegramService,
   TelegramOptions,
-} from "../../../usecases/ports/adapters/telegram-service";
+} from "../../../usecases/protocols/messageria/telegram-service";
 
 export class TelegramService implements ITelegramService {
   async send(options: TelegramOptions) {

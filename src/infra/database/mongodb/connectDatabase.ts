@@ -1,9 +1,10 @@
 import mongoose from "mongoose";
-import Logger from "../../../utils/logger";
+import { LoggerWithPino } from "../../logger/logger-adapter";
 
 const ConnectDatabase = async (dbUrl: string) => {
-	await mongoose.connect(dbUrl);
-	Logger.info("Connected to database");
+  const Logger = new LoggerWithPino();
+  await mongoose.connect(dbUrl);
+  Logger.info({ description: "Connected to database" });
 };
 
 export default ConnectDatabase;

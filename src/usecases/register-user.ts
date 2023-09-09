@@ -1,19 +1,22 @@
 import { User } from "../domain/entities/user";
 import { RegisterUserError } from "./errors/register-user-error";
 import { UserAlreadyExistsError } from "./errors/user-already-exists";
-import { IEmailService } from "./ports/adapters/email-service";
-import { confirmAccountTemplate } from "../utils/templates/email/confirm-account";
-import { hashPassword } from "../utils/bcrypt";
-import { IUserRepository } from "./ports/repositories/user-repository";
+import { confirmAccountTemplate } from "./templates/email/confirm-account";
 import {
   IRegisterUser,
   RegisterUserDto,
 } from "../domain/usecases/register-user";
+import { IEmailService } from "./protocols/messageria/email-service";
+import { IUserRepository } from "./protocols/repositories/user-repository";
+import { ILogger } from "./protocols/logger/logger";
+import { Hasher } from "./protocols/crypto/hasher";
 
 export class RegisterUser implements IRegisterUser {
   constructor(
     private readonly userRepository: IUserRepository,
-    private readonly mailService: IEmailService
+    private readonly mailService: IEmailService,
+    private readonly logger: ILogger,
+    private readonly hashser: Hasher
   ) {}
   async execute(data: RegisterUserDto): Promise<User | null> {
     const userAlreadyExists = await this.userRepository.findByEmail(data.email);
@@ -26,7 +29,7 @@ export class RegisterUser implements IRegisterUser {
       const newUser = new User({
         name: data.name,
         email: data.email,
-        password: await hashPassword(data.password, 10),
+        password: await this.hashser.hash(data.password),
       });
 
       const user = await this.userRepository.create(newUser);
@@ -40,7 +43,7 @@ export class RegisterUser implements IRegisterUser {
       });
       return user;
     } catch (err) {
-      console.log(err);
+      this.logger.error({ extraInfo: err });
       throw new RegisterUserError();
     }
   }

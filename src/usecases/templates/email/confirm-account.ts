@@ -1,7 +1,7 @@
 import config from "config";
 
 export const confirmAccountTemplate = (verifyCode: string) => {
-	return `<!DOCTYPE html>
+  return `<!DOCTYPE html>
 <html>
 <head>
     <title>Bem-vindo ao Hermes App</title>
@@ -48,8 +48,8 @@ export const confirmAccountTemplate = (verifyCode: string) => {
         <h1>Bem-vindo ao Hermes App!</h1>
         <p>Estamos emocionados por tê-lo como parte da nossa comunidade. Para começar a usar nossa plataforma, por favor, verifique sua conta:</p>
         <a href="${config.get(
-					"baseurl"
-				)}/users/${verifyCode}" class="button">Verificar Conta</a>
+          "baseurl"
+        )}/users/${verifyCode}" class="button">Verificar Conta</a>
     </div>
 </body>
 </html>

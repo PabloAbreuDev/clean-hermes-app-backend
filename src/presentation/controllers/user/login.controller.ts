@@ -8,7 +8,7 @@ export class LoginController implements Controller {
     try {
       const { email, password } = httpRequest.body as LoginDto;
       const response = await this.loginService.execute({ email, password });
-      return ok(response);
+      return ok({ token: response });
     } catch (err: any) {
       return serverError(err);
     }

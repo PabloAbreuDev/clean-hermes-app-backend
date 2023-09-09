@@ -1,4 +1,4 @@
-import { INotificationRepository } from "../../ports/repositories/notification-repository";
+import { INotificationRepository } from "../../protocols/repositories/notification-repository";
 
 export const mockNotificationRepository: jest.Mocked<INotificationRepository> =
   {
