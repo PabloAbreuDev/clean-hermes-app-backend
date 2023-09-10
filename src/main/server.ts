@@ -6,6 +6,7 @@ import { initializeBot } from "../infra/messageria/telegram/telegram";
 import notificationRoutes from "./routes/notification-routes-express";
 import userRoutes from "./routes/user-routes-express";
 import { LoggerWithPino } from "../infra/logger/logger-adapter";
+import checkHealthReportRoutes from "./routes/check-health-report-routes-express";
 
 // Basic configurations
 const app = express();
@@ -22,6 +23,7 @@ app.use(
 
 app.use("/notifications", notificationRoutes);
 app.use("/users", userRoutes);
+app.use("/checkHealthReport", checkHealthReportRoutes);
 
 const port = config.get("port");
 
