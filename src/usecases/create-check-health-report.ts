@@ -3,8 +3,10 @@ import {
   CreateCheckHealthReportDto,
   ICreateCheckHealthReport,
 } from "../domain/usecases/create-check-health-report";
+import { CheckHealth } from "./check-health";
 import { CreateCheckHealthReportError } from "./errors/create-check-health-report";
 import { UserNotFoundError } from "./errors/user-not-found";
+import { ICronJob } from "./protocols/cron/cron-job";
 import { ILogger } from "./protocols/logger/logger";
 import { ICheckHealthReportRepository } from "./protocols/repositories/check-health-report-repository";
 import { IUserRepository } from "./protocols/repositories/user-repository";
@@ -13,7 +15,9 @@ export class CreateCheckHealthReport implements ICreateCheckHealthReport {
   constructor(
     private readonly checkHealthRepository: ICheckHealthReportRepository,
     private readonly userRepository: IUserRepository,
-    private readonly logger: ILogger
+    private readonly logger: ILogger,
+    private readonly cronJob: ICronJob,
+    private readonly checkHealth: CheckHealth
   ) {}
 
   async execute(
@@ -25,18 +29,34 @@ export class CreateCheckHealthReport implements ICreateCheckHealthReport {
       throw new UserNotFoundError();
     }
 
-    try {
-      const checkHealthReport = new CheckHealthReport({
-        urlToCheck: data.url,
-        userId: data.userId,
-      });
+    const checkHealthReport = new CheckHealthReport({
+      urlToCheck: data.url,
+      userId: data.userId,
+    });
 
-      return await this.checkHealthRepository.create(checkHealthReport);
+    try {
+      const checkHealthDatabaseObject = await this.checkHealthRepository.create(
+        checkHealthReport
+      );
+
+      if (!checkHealthDatabaseObject) {
+        throw new CreateCheckHealthReportError();
+      }
+
+      if (checkHealthDatabaseObject) {
+        this.cronJob.create({
+          cronExpression: "1 * * * * *",
+          callBackFunction: () =>
+            this.checkHealth.execute({
+              checkHealthId: checkHealthDatabaseObject.id,
+              urlToCheck: data.url,
+            }),
+          id: checkHealthDatabaseObject.id,
+        });
+      }
+      return checkHealthDatabaseObject;
     } catch (err) {
-      this.logger.error({
-        description: "Error creating check health report",
-        extraInfo: err,
-      });
+      this.logger.error({ extraInfo: err });
       throw new CreateCheckHealthReportError();
     }
   }

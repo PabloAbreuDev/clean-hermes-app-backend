@@ -23,7 +23,7 @@ export class User {
     }
 
     if (!props.email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) {
-      throw new Error("You must enter a valid email.");
+      throw new Error("You must enter a valid email");
     }
 
     this.name = props.name;

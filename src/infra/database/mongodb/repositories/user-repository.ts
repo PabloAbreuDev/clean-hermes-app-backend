@@ -5,7 +5,8 @@ import UserModel from "../models/user";
 
 export class UserRepository implements IUserRepository {
   async create(data: Partial<User>): Promise<WithId<User> | null> {
-    return (await UserModel.create(data)).toJSON();
+    const obj = await UserModel.create(data);
+    return { ...obj.toJSON(), id: obj.id };
   }
   async findById(id: string): Promise<WithId<User> | null> {
     return await UserModel.findById(id);

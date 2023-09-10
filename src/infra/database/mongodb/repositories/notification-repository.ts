@@ -8,7 +8,8 @@ export class NotificationRepository implements INotificationRepository {
   async create(
     data: Partial<Notification>
   ): Promise<WithId<Notification> | null> {
-    return (await NotificationModel.create(data)).toJSON();
+    const obj = await NotificationModel.create(data);
+    return { ...obj.toJSON(), id: obj.id };
   }
   async findById(id: string): Promise<WithId<Notification> | null> {
     return await NotificationModel.findById(id);

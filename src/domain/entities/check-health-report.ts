@@ -1,7 +1,6 @@
 export interface LogHealthCheck {
   checkDate: Date;
   result: "OK" | "ERROR";
-  responseTime: number;
 }
 
 export class CheckHealthReport {
