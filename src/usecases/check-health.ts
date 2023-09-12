@@ -10,7 +10,6 @@ export class CheckHealth implements ICheckHealth {
   ) {}
   async execute(data: CheckHealthDto): Promise<void> {
     try {
-      console.log(data);
       const checkHealth = await this.checkHealthRepository.findById(
         data.checkHealthId
       );

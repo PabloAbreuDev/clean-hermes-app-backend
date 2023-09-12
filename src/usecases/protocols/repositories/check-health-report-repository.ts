@@ -7,4 +7,5 @@ import { IBaseRepository } from "./index.ts";
 export interface ICheckHealthReportRepository
   extends IBaseRepository<CheckHealthReport> {
   addReport(log: LogHealthCheck, id: string): Promise<CheckHealthReport | null>;
+  cancelCheckHealth(id: string): Promise<CheckHealthReport | null>;
 }

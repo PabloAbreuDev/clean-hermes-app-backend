@@ -45,4 +45,16 @@ export class CheckHealthReportRepository
     );
     return obj ? (obj.toObject() as WithId<CheckHealthReport>) : null;
   }
+
+  async cancelCheckHealth(id: string): Promise<CheckHealthReport | null> {
+    return await CheckHealthReportModel.findByIdAndUpdate(
+      id,
+      {
+        $set: {
+          active: false,
+        },
+      },
+      { new: true }
+    );
+  }
 }
