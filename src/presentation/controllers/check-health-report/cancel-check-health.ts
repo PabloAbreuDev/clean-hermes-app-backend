@@ -10,7 +10,7 @@ export class CancelCheckHealthController implements Controller {
   async handle(httpRequest: HttpRequest): Promise<HttpResponse> {
     try {
       const { userId } = httpRequest;
-      const { checkHealthId } = httpRequest.body as CancelCheckHealthDto;
+      const { checkHealthId } = httpRequest.params as CancelCheckHealthDto;
       const response = await this.cancelCheckHealth.execute({
         checkHealthId,
         userId,

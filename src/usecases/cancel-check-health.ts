@@ -25,7 +25,11 @@ export class CancelCheckHealth implements ICancelCheckHealth {
       data.checkHealthId
     );
 
-    if (!checkHealth || checkHealth.userId !== data.userId) {
+    if (
+      !checkHealth ||
+      checkHealth.userId !== data.userId ||
+      !checkHealth.active
+    ) {
       throw new CheckHealthReportNotFoundError();
     }
 
