@@ -3,7 +3,7 @@ import {
   SendNotificationDto,
 } from "../../../domain/usecases/send-notification";
 import { Controller, HttpRequest, HttpResponse } from "../../protocols/http";
-import { created, serverError } from "../../protocols/status";
+import { created, serverError } from "../../helpers/status";
 
 export class SendNotificationController implements Controller {
   constructor(private readonly sendNotification: ISendNotification) {}

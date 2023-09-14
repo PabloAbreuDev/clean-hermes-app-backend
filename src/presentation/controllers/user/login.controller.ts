@@ -1,4 +1,4 @@
-import { ok, serverError } from "../../protocols/status";
+import { ok, serverError } from "../../helpers/status";
 import { Controller, HttpRequest, HttpResponse } from "../../protocols/http";
 import { ILogin, LoginDto } from "../../../domain/usecases/login";
 

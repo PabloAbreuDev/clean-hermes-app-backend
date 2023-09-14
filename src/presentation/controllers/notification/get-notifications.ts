@@ -3,7 +3,7 @@ import {
   IGetnotifications,
 } from "../../../domain/usecases/get-notification";
 import { Controller, HttpRequest, HttpResponse } from "../../protocols/http";
-import { ok, serverError } from "../../protocols/status";
+import { ok, serverError } from "../../helpers/status";
 
 export class GetNotificationsController implements Controller {
   constructor(private readonly getNotifications: IGetnotifications) {}

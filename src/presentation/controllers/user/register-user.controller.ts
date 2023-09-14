@@ -3,7 +3,7 @@ import {
   RegisterUserDto,
 } from "../../../domain/usecases/register-user";
 import { Controller, HttpRequest, HttpResponse } from "../../protocols/http";
-import { created, serverError } from "../../protocols/status";
+import { created, serverError } from "../../helpers/status";
 
 export class RegisterUserController implements Controller {
   constructor(private readonly registerUser: IRegisterUser) {}

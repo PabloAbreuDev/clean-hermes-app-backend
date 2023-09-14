@@ -3,7 +3,7 @@ import {
   IGetCheckHealthReports,
 } from "../../../domain/usecases/get-check-health-reports";
 import { Controller, HttpRequest, HttpResponse } from "../../protocols/http";
-import { ok, serverError } from "../../protocols/status";
+import { ok, serverError } from "../../helpers/status";
 
 export class GetCheckHealthReportsController implements Controller {
   constructor(private readonly getHealthCheckReports: IGetCheckHealthReports) {}

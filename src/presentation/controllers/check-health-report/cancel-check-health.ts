@@ -3,7 +3,7 @@ import {
   ICancelCheckHealth,
 } from "../../../domain/usecases/cancel-check-health";
 import { Controller, HttpRequest, HttpResponse } from "../../protocols/http";
-import { ok, serverError } from "../../protocols/status";
+import { ok, serverError } from "../../helpers/status";
 
 export class CancelCheckHealthController implements Controller {
   constructor(private readonly cancelCheckHealth: ICancelCheckHealth) {}

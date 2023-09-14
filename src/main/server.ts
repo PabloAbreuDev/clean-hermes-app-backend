@@ -7,7 +7,6 @@ import notificationRoutes from "./routes/notification-routes-express";
 import userRoutes from "./routes/user-routes-express";
 import { LoggerWithPino } from "../infra/logger/logger-adapter";
 import checkHealthReportRoutes from "./routes/check-health-report-routes-express";
-import CacheService from "../infra/cache/cache";
 
 // Basic configurations
 const app = express();

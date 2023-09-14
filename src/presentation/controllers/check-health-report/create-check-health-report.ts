@@ -3,7 +3,7 @@ import {
   ICreateCheckHealthReport,
 } from "../../../domain/usecases/create-check-health-report";
 import { Controller, HttpRequest, HttpResponse } from "../../protocols/http";
-import { created, serverError } from "../../protocols/status";
+import { created, serverError } from "../../helpers/status";
 
 export class CreateCheckHealthReportController implements Controller {
   constructor(

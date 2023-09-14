@@ -3,7 +3,7 @@ import {
   ConfirmAccountDto,
 } from "../../../domain/usecases/confirm-account";
 import { Controller, HttpRequest, HttpResponse } from "../../protocols/http";
-import { ok, serverError } from "../../protocols/status";
+import { ok, serverError } from "../../helpers/status";
 
 export class ConfirmAccountController implements Controller {
   constructor(private readonly confirmAccount: IConfirmAccount) {}
