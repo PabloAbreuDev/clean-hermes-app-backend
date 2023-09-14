@@ -5,7 +5,7 @@ import {
 } from "../domain/usecases/get-check-health-reports";
 import { UserNotFoundError } from "./errors/user-not-found";
 import { ICheckHealthReportRepository } from "./protocols/repositories/check-health-report-repository";
-import { WithId } from "./protocols/repositories/index.ts";
+import { AlreadyExists } from "./protocols/repositories/index.ts";
 import { IUserRepository } from "./protocols/repositories/user-repository";
 
 export class GetCheckHealthReports implements IGetCheckHealthReports {
@@ -15,7 +15,7 @@ export class GetCheckHealthReports implements IGetCheckHealthReports {
   ) {}
   async execute(
     data: GetCheckHealthReportsDto
-  ): Promise<WithId<CheckHealthReport>[] | null> {
+  ): Promise<AlreadyExists<CheckHealthReport>[] | null> {
     const user = await this.userRepository.findById(data.userId);
 
     if (!user) {

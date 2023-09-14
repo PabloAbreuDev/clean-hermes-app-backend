@@ -8,11 +8,6 @@ export interface CancelCronJobDto {
   id: string;
 }
 
-export interface activeJob {
-  id: string;
-  job: any;
-}
-
 export interface ICronJob {
   create(data: CreateCronJobDto): boolean;
   cancel(data: CancelCronJobDto): boolean;

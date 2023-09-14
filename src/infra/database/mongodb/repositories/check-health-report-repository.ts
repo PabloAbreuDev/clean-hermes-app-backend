@@ -3,7 +3,7 @@ import {
   LogHealthCheck,
 } from "../../../../domain/entities/check-health-report";
 import { ICheckHealthReportRepository } from "../../../../usecases/protocols/repositories/check-health-report-repository";
-import { WithId } from "../../../../usecases/protocols/repositories/index.ts";
+import { AlreadyExists } from "../../../../usecases/protocols/repositories/index.ts";
 import CheckHealthReportModel from "../models/check-health-report";
 
 export class CheckHealthReportRepository
@@ -11,21 +11,21 @@ export class CheckHealthReportRepository
 {
   async create(
     data: Partial<CheckHealthReport>
-  ): Promise<WithId<CheckHealthReport> | null> {
+  ): Promise<AlreadyExists<CheckHealthReport> | null> {
     const obj = await CheckHealthReportModel.create(data);
     return { ...obj.toJSON(), id: obj.id };
   }
-  async findById(id: string): Promise<WithId<CheckHealthReport> | null> {
+  async findById(id: string): Promise<AlreadyExists<CheckHealthReport> | null> {
     return await CheckHealthReportModel.findById(id);
   }
   async find(
     data: Partial<CheckHealthReport>
-  ): Promise<WithId<CheckHealthReport>[] | null> {
+  ): Promise<AlreadyExists<CheckHealthReport>[] | null> {
     return await CheckHealthReportModel.find(data);
   }
   async findOne(
     data: Partial<CheckHealthReport>
-  ): Promise<WithId<CheckHealthReport> | null> {
+  ): Promise<AlreadyExists<CheckHealthReport> | null> {
     return await CheckHealthReportModel.findOne(data);
   }
   async addReport(
@@ -43,7 +43,7 @@ export class CheckHealthReportRepository
         new: true,
       }
     );
-    return obj ? (obj.toObject() as WithId<CheckHealthReport>) : null;
+    return obj ? (obj.toObject() as AlreadyExists<CheckHealthReport>) : null;
   }
 
   async cancelCheckHealth(id: string): Promise<CheckHealthReport | null> {

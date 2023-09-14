@@ -1,5 +1,3 @@
-import { CronJob } from "cron";
-import cron, { ScheduledTask } from "node-cron";
 import { scheduleJob, scheduledJobs } from "node-schedule";
 import {
   CancelCronJobDto,
@@ -7,14 +5,8 @@ import {
   ICronJob,
 } from "../../usecases/protocols/cron/cron-job";
 import { LoggerWithPino } from "../logger/logger-adapter";
-import CacheService from "../cache/cache";
 
 export class CronManage implements ICronJob {
-  private cacheService: CacheService;
-  constructor() {
-    this.cacheService = CacheService.getInstance();
-  }
-
   create(data: CreateCronJobDto): boolean {
     const logger = new LoggerWithPino();
     try {

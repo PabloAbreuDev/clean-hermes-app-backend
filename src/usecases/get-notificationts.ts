@@ -4,7 +4,7 @@ import {
   IGetnotifications,
 } from "../domain/usecases/get-notification";
 import { UserNotFoundError } from "./errors/user-not-found";
-import { WithId } from "./protocols/repositories/index.ts";
+import { AlreadyExists } from "./protocols/repositories/index.ts";
 import { INotificationRepository } from "./protocols/repositories/notification-repository";
 import { IUserRepository } from "./protocols/repositories/user-repository";
 
@@ -15,7 +15,7 @@ export class GetNotifications implements IGetnotifications {
   ) {}
   async execute(
     data: GetNotificationsDto
-  ): Promise<WithId<Notification>[] | null> {
+  ): Promise<AlreadyExists<Notification>[] | null> {
     const user = await this.userRepository.findById(data.userId);
 
     if (!user) {
