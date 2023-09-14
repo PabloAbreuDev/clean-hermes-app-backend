@@ -11,7 +11,8 @@ export class CreateCheckHealthReportController implements Controller {
   ) {}
   async handle(httpRequest: HttpRequest): Promise<HttpResponse> {
     try {
-      const { url, userId } = httpRequest.body as CreateCheckHealthReportDto;
+      const { userId } = httpRequest;
+      const { url } = httpRequest.body as CreateCheckHealthReportDto;
       const response = await this.createCheckHealthReport.execute({
         url,
         userId,

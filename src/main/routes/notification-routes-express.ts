@@ -14,6 +14,10 @@ notificationRoutes.post(
   checkRules,
   adaptRoute(makeSendNotification())
 );
-notificationRoutes.get("/:userId", adaptRoute(makeGetNotifications()));
+notificationRoutes.get(
+  "/",
+  jwtAuthentication,
+  adaptRoute(makeGetNotifications())
+);
 
 export default notificationRoutes;

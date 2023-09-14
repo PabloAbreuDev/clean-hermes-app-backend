@@ -14,8 +14,9 @@ export class SendNotificationController implements Controller {
         receiverEmailOptions,
         receiverTelegramOptions,
         receiverType,
-        userId,
       } = httpRequest.body as SendNotificationDto;
+      const { userId } = httpRequest;
+      console.log(userId);
       const response = await this.sendNotification.execute({
         notification,
         receiverEmailOptions,

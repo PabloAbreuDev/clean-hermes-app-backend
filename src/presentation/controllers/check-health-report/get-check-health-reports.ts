@@ -9,7 +9,7 @@ export class GetCheckHealthReportsController implements Controller {
   constructor(private readonly getHealthCheckReports: IGetCheckHealthReports) {}
   async handle(httpRequest: HttpRequest): Promise<HttpResponse> {
     try {
-      const { userId } = httpRequest.params as GetCheckHealthReportsDto;
+      const { userId } = httpRequest;
       const response = await this.getHealthCheckReports.execute({
         userId,
       });

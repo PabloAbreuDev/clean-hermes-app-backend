@@ -9,8 +9,8 @@ export class GenerateTelegramURLController implements Controller {
   constructor(private readonly generateTelegramToken: IGenerateTelegramUrl) {}
   async handle(httpRequest: HttpRequest): Promise<HttpResponse> {
     try {
-      const { id } = httpRequest.body as GenerateTelegramUrlDto;
-      const response = await this.generateTelegramToken.execute({ id });
+      const { userId } = httpRequest;
+      const response = await this.generateTelegramToken.execute({ userId });
       return created({ telegramUrl: response });
     } catch (err: any) {
       return serverError(err);

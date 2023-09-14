@@ -9,7 +9,7 @@ import { IUserRepository } from "./protocols/repositories/user-repository";
 export class GenerateTelegramUrl implements IGenerateTelegramUrl {
   constructor(private readonly userRepository: IUserRepository) {}
   async execute(data: GenerateTelegramUrlDto): Promise<string> {
-    const user = await this.userRepository.findById(data.id);
+    const user = await this.userRepository.findById(data.userId);
     if (!user) {
       throw new UserNotFoundError();
     }

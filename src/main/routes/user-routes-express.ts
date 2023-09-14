@@ -6,6 +6,7 @@ import { makeRegisterUserController } from "../factories/register-user";
 import { makeConfirmAccount } from "../factories/confirm-account";
 import { makeUserLoginController } from "../factories/login";
 import { makeGenerateTelegramUrl } from "../factories/generate-telegram-token";
+import { jwtAuthentication } from "../middlewares/auth";
 
 const userRoutes = Router();
 userRoutes.post(
@@ -16,6 +17,10 @@ userRoutes.post(
 );
 userRoutes.get("/:verifyCode", adaptRoute(makeConfirmAccount()));
 userRoutes.post("/login", adaptRoute(makeUserLoginController()));
-userRoutes.post("/telegram", adaptRoute(makeGenerateTelegramUrl()));
+userRoutes.post(
+  "/telegram",
+  jwtAuthentication,
+  adaptRoute(makeGenerateTelegramUrl())
+);
 
 export default userRoutes;

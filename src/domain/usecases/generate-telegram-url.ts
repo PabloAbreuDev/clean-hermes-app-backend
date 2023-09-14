@@ -1,5 +1,5 @@
 export interface GenerateTelegramUrlDto {
-  id: string;
+  userId: string;
 }
 
 export interface IGenerateTelegramUrl {

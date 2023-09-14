@@ -6,6 +6,7 @@ export interface HttpRequest {
   body?: Record<string, any>;
   params?: Record<string, any>;
   headers?: Record<string, any>;
+  userId: string;
 }
 
 export interface Controller {

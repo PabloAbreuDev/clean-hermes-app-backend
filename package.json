@@ -5,12 +5,13 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "dev": "ts-node-dev src/main/server.ts"
+    "dev": "ts-node-dev --files src/main/server.ts"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@types/node": "^20.6.0",
     "add": "^2.0.6",
     "axios": "^1.5.0",
     "bcrypt": "^5.1.1",

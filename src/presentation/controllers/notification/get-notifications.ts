@@ -9,7 +9,8 @@ export class GetNotificationsController implements Controller {
   constructor(private readonly getNotifications: IGetnotifications) {}
   async handle(httpRequest: HttpRequest): Promise<HttpResponse> {
     try {
-      const { userId } = httpRequest.params as GetNotificationsDto;
+      const { userId } = httpRequest;
+      console.log(userId);
       const response = await this.getNotifications.execute({
         userId,
       });

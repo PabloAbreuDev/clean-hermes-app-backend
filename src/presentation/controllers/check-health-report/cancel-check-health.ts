@@ -9,8 +9,8 @@ export class CancelCheckHealthController implements Controller {
   constructor(private readonly cancelCheckHealth: ICancelCheckHealth) {}
   async handle(httpRequest: HttpRequest): Promise<HttpResponse> {
     try {
-      const { checkHealthId, userId } =
-        httpRequest.body as CancelCheckHealthDto;
+      const { userId } = httpRequest;
+      const { checkHealthId } = httpRequest.body as CancelCheckHealthDto;
       const response = await this.cancelCheckHealth.execute({
         checkHealthId,
         userId,
