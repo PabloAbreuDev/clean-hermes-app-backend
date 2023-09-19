@@ -9,7 +9,7 @@ export class CheckHealth implements ICheckHealth {
     private readonly client: Client
   ) {}
   async execute(data: CheckHealthDto): Promise<void> {
-    try {
+   
       const checkHealth = await this.checkHealthRepository.findById(
         data.checkHealthId
       );
@@ -17,15 +17,18 @@ export class CheckHealth implements ICheckHealth {
       if (!checkHealth) {
         throw new CheckHealthReportNotFoundError();
       }
-      await this.client.doRequest(data.urlToCheck, "GET");
 
-      await this.checkHealthRepository.addReport(
-        {
-          checkDate: new Date(),
-          result: "OK",
-        },
-        data.checkHealthId
-      );
+      try {
+
+        await this.client.doRequest(data.urlToCheck, "GET");
+
+        await this.checkHealthRepository.addReport(
+          {
+            checkDate: new Date(),
+            result: "OK",
+          },
+          data.checkHealthId
+        );
     } catch (err) {
       await this.checkHealthRepository.addReport(
         {
