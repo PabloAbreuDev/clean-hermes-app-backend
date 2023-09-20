@@ -33,9 +33,11 @@ describe("Create check health report", () => {
     expect(sut).toBeTruthy();
     expect(sut).toHaveProperty("id");
     expect(sut!.id).toBe("1");
-    expect(mockUserRepository.findById).toBeCalled()
-    expect(mockUserRepository.findById).toBeCalledWith(mockedCheckHealthReport.userId)
-    expect(mockCron.create).toBeCalledTimes(1)
+    expect(mockUserRepository.findById).toBeCalled();
+    expect(mockUserRepository.findById).toBeCalledWith(
+      mockedCheckHealthReport.userId
+    );
+    expect(mockCron.create).toBeCalledTimes(1);
   });
 
   it("Should throw an error if user not found", async () => {
@@ -76,7 +78,7 @@ describe("Create check health report", () => {
     ).rejects.toThrow(new CreateCheckHealthReportError());
   });
 
-  it("Should throw an error if cron job is not created", async ()=>{
+  it("Should throw an error if cron job is not created", async () => {
     jest.spyOn(mockUserRepository, "findById").mockResolvedValue(mockedUser);
     jest
       .spyOn(mockCheckHealthRepository, "create")
@@ -97,5 +99,26 @@ describe("Create check health report", () => {
         userId: mockedCheckHealthReport.userId,
       })
     ).rejects.toThrow(new CreateCheckHealthReportError());
-  })
+  });
+
+  it("Should throw an error if check health report is not created", async () => {
+    jest.spyOn(mockUserRepository, "findById").mockResolvedValue(mockedUser);
+    jest.spyOn(mockCheckHealthRepository, "create").mockResolvedValue(null);
+    jest.spyOn(mockCron, "create").mockReturnValue(true);
+
+    const createCheckHealthReport = new CreateCheckHealthReport(
+      mockCheckHealthRepository,
+      mockUserRepository,
+      new LoggerWithPino(),
+      mockCron,
+      new CheckHealth(mockCheckHealthRepository, mockClient)
+    );
+
+    await expect(
+      createCheckHealthReport.execute({
+        url: mockedCheckHealthReport.urlToCheck,
+        userId: mockedCheckHealthReport.userId,
+      })
+    ).rejects.toThrow(new CreateCheckHealthReportError());
+  });
 });

@@ -78,7 +78,6 @@ export class SendNotification implements ISendNotification {
     } catch (err) {
       this.logger.error({ extraInfo: err });
       throw new CreateNotificationError();
-      return;
     }
   }
 }
