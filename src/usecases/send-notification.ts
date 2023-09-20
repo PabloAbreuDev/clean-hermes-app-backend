@@ -3,6 +3,7 @@ import {
   ISendNotification,
   SendNotificationDto,
 } from "../domain/usecases/send-notification";
+import { CreateNotificationError } from "./errors/create-notification";
 import { InvalidChatIdError } from "./errors/invalid-chat-id";
 import { SendMailError } from "./errors/send-mail-error";
 import { SendTelegramError } from "./errors/send-telegram-error";
@@ -31,6 +32,14 @@ export class SendNotification implements ISendNotification {
     }
 
     if (data.receiverType === "EMAIL") {
+      if (
+        !data.receiverEmailOptions ||
+        !data.receiverEmailOptions.address ||
+        !data.receiverEmailOptions.subject ||
+        !data.receiverEmailOptions.text
+      ) {
+        throw new SendMailError();
+      }
       try {
         await this.mailService.send({
           to: data.receiverEmailOptions.address,
@@ -47,7 +56,6 @@ export class SendNotification implements ISendNotification {
       if (!user.telegramChatId) {
         throw new InvalidChatIdError();
       }
-
       try {
         await this.telegramService.send({
           to: user.telegramChatId,
@@ -69,6 +77,7 @@ export class SendNotification implements ISendNotification {
       return await this.notificationRepository.create(notification);
     } catch (err) {
       this.logger.error({ extraInfo: err });
+      throw new CreateNotificationError();
       return;
     }
   }

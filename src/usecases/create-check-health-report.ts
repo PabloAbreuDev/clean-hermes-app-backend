@@ -9,6 +9,7 @@ import { UserNotFoundError } from "./errors/user-not-found";
 import { ICronJob } from "./protocols/cron/cron-job";
 import { ILogger } from "./protocols/logger/logger";
 import { ICheckHealthReportRepository } from "./protocols/repositories/check-health-report-repository";
+import { AlreadyExists } from "./protocols/repositories/index.ts";
 import { IUserRepository } from "./protocols/repositories/user-repository";
 
 export class CreateCheckHealthReport implements ICreateCheckHealthReport {
@@ -22,7 +23,7 @@ export class CreateCheckHealthReport implements ICreateCheckHealthReport {
 
   async execute(
     data: CreateCheckHealthReportDto
-  ): Promise<CheckHealthReport | null> {
+  ): Promise<AlreadyExists<CheckHealthReport> | null> {
     const user = await this.userRepository.findById(data.userId);
 
     if (!user) {
@@ -44,7 +45,7 @@ export class CreateCheckHealthReport implements ICreateCheckHealthReport {
       }
 
       if (checkHealthDatabaseObject) {
-        this.cronJob.create({
+        const called = this.cronJob.create({
           cronExpression: "1 * * * * *",
           callBackFunction: () =>
             this.checkHealth.execute({
@@ -53,6 +54,10 @@ export class CreateCheckHealthReport implements ICreateCheckHealthReport {
             }),
           id: checkHealthDatabaseObject.id,
         });
+
+        if (!called) {
+          throw new CreateCheckHealthReportError();
+        }
       }
       return checkHealthDatabaseObject;
     } catch (err) {

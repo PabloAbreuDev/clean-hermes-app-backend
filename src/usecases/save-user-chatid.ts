@@ -3,6 +3,7 @@ import {
   ISaveUserChatId,
   SaveUserChatIdDto,
 } from "../domain/usecases/save-user-chatid";
+import { SaveChatIdError } from "./errors/save-chat-error";
 import { UserNotFoundError } from "./errors/user-not-found";
 import { ILogger } from "./protocols/logger/logger";
 import { IUserRepository } from "./protocols/repositories/user-repository";
@@ -28,7 +29,7 @@ export class SaveUserChatId implements ISaveUserChatId {
         description: "Error on save chat id",
         extraInfo: err,
       });
-      return;
+      throw new SaveChatIdError();
     }
   }
 }

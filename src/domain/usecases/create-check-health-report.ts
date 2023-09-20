@@ -1,3 +1,4 @@
+import { AlreadyExists } from "../../usecases/protocols/repositories/index.ts";
 import { CheckHealthReport } from "../entities/check-health-report";
 
 export interface CreateCheckHealthReportDto {
@@ -5,5 +6,5 @@ export interface CreateCheckHealthReportDto {
   userId: string;
 }
 export interface ICreateCheckHealthReport {
-  execute(data: CreateCheckHealthReportDto): Promise<CheckHealthReport | null>;
+  execute(data: CreateCheckHealthReportDto): Promise<AlreadyExists<CheckHealthReport> | null>;
 }
